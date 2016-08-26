@@ -1,7 +1,8 @@
 "use strict";
 
-let login = require('./user.js')
-let omdb = require('./omdb-api')
+let login = require('./user.js');
+let omdb = require('./omdb-api');
+
 
 let userID = null;
 
@@ -21,7 +22,7 @@ function setEvents () {
         console.log("Searching for movie")
         let userSearch = $('#userInput').val()
         omdb.searchMovies(userSearch)
-        // .then(loadMoviesToDom)
+        .then(outputToDomSimple(movieData.search))
     })
 }
 
