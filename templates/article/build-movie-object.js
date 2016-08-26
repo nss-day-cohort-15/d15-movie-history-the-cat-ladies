@@ -1,8 +1,8 @@
 "use strict";
 
 function buildSimpleMovieObj(movie) {
-    let events = require('../../src/js/events.js')
-    let userID = events.getUserID()
+    let events = require('../../src/js/events.js');
+    let userID = events.getUserID();
     let simpleMovie = {
         title: movie.Title,
         year: movie.Year,
@@ -14,11 +14,14 @@ function buildSimpleMovieObj(movie) {
 }
 
 function buildComplexMovieObj(simpleMovieObj) {
+    let events = require('../../src/js/events.js');
+    let userID = events.getUserID();
     let complexMovie = {
         title: simpleMovieObj.Title,
         year: simpleMovieObj.Year,
         posterURL: simpleMovieObj.Poster,
-        uid: simpleMovieObj.userID,
+        uid: userID,
+        actors: simpleMovieObj.Actors,
         watched: false,
         rating: 0
     }
