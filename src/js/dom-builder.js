@@ -16,9 +16,9 @@ function outputToDomSimple(movieData) {
       $('#initialSearchOutput').append(output);
     })
 
-    $('.saveButton').click(function(){
-      debugger;
-      console.log('save clicked :', this)
+    $('.saveButton').click(function(evt){
+      var name = $(this).parent().parent().find('h3').html();
+      var year = $(this).parent().parent().find('h4').html();
     });
 
 }
