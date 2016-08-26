@@ -28,6 +28,13 @@ function setEvents () {
           domBuilder(movies);
         })
     })
+
+    $("#findNew").click(function (){
+        $('#initialSearchOutput').html('');
+        $("#userInput").val('');
+        $('#userInput').focus();
+        console.log('findNew button clicked');
+    })
 }
 
 function getUserID () {
