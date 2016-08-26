@@ -1,16 +1,20 @@
 "use strict";
 
 
-let simpleMovieTemplate = require('.simpleMovieTemplate.hbs');
-let complexMovieTemplate = require('.complexMovieTemplate.hbs');
+let simpleMovieTemplate = require('../../templates/article/simpleMovieTemplate.hbs');
+let complexMovieTemplate = require('../../templates/article/complexMovieTemplate.hbs');
+let objectBuilders = require('../../templates/article/build-movie-object.js')
 
 function outputToDomSimple(movieData) {
-    movieData.forEach(function(movie) {
-    let simpleMovieObject = buildSimpleMovieObj(movie);
+    console.log("inside outputToDomSimple")
+    console.log("movie data", movieData)
+    movieData.Search.forEach(function(movie) {
+    let simpleMovieObject = objectBuilders.buildSimpleMovieObj(movie);
     let output = simpleMovieTemplate(simpleMovieObject);
     $('#initialSearchOutput').append(output);
-})
-];
+    })
+}
+
 // function outputToDomComplex(movie) {
 
 //     let complexMovieObject = buildComplexMovieObj(movie);

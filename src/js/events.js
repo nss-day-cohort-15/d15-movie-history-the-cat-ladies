@@ -2,6 +2,7 @@
 
 let login = require('./user.js');
 let omdb = require('./omdb-api');
+let domBuilder = require('./dom-builder.js');
 
 
 let userID = null;
@@ -23,7 +24,7 @@ function setEvents () {
         console.log("Searching for movie")
         let userSearch = $('#userInput').val()
         omdb.searchMovies(userSearch)
-        .then(outputToDomSimple(movieData.search))
+        .then(function (movies) {domBuilder(movies)})
     })
 }
 

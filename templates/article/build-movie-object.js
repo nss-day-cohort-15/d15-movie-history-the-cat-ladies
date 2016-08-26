@@ -1,9 +1,5 @@
 "use strict";
 
-let simpleMovieTemplate = require('./simpleMovieTemplate.hbs');
-let complexMovieTemplate = require('./complexMovieTemplate.hbs');
-
-
 function buildSimpleMovieObj(movie) {
     let events = require('../../src/js/events.js')
     let userID = events.getUserID()
@@ -26,4 +22,7 @@ function buildComplexMovieObj(simpleMovieObj) {
         watched: false,
         rating: 0
     }
+    return complexMovie
 }
+
+module.exports = {buildComplexMovieObj, buildSimpleMovieObj}
