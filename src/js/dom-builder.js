@@ -6,6 +6,7 @@ let complexMovieTemplate = require('../../templates/article/complexMovieTemplate
 let objectBuilders = require('../../templates/article/build-movie-object.js')
 
 function outputToDomSimple(movieData) {
+    $('#initialSearchOutput').html("");
     console.log("inside outputToDomSimple")
     console.log("movie data", movieData)
     movieData.Search.forEach(function(movie) {
