@@ -7,40 +7,40 @@ function getMovies() {
   return new Promise(function(resolve, reject){
     $.ajax({
       url: `${url}movies.json`
-    }).done(function(songData){
-      resolve(songData);
+    }).done(function(movieData){
+      resolve(movieData);
     });
   });
 }
 
-function addMovie(songFormObj) {
+function addMovie(movieObj) {
   return new Promise(function(resolve, reject){
     $.ajax({
       url: `${url}movies.json`,
       type: 'POST',
-      data: JSON.stringify(songFormObj),
+      data: JSON.stringify(movieObj),
       dataType: 'json'
-    }).done(function(songId){
-      resolve(songId);
+    }).done(function(movieID){
+      resolve(movieID);
     });
   });
 }
 
-function deleteMovie(movieId) {
+function deleteMovie(movieID) {
   return new Promise(function(resolve, reject){
     $.ajax({
-      url: `${url}/movies/${movieId}.json`,
+      url: `${url}/movies/${movieID}.json`,
       type: 'DELETE'
     }).done((data)=> resolve(data));
   });
 }
 
-function editMovieRating(movieFormObj, movieId) {
+function editMovieRating(movieObj, movieId) {
   return new Promise(function(resolve, reject){
     $.ajax({
-      url: `${url}/songs/${movieId}.json`,
+      url: `${url}/movies/${movieID}.json`,
       type: 'PUT',
-      data: JSON.stringify(movieFormObj)
+      data: JSON.stringify(movieObj)
     }).done(function(data){
         resolve(data);
     });
