@@ -4,13 +4,13 @@ let simpleMovieTemplate = require('./simpleMovieTemplate.hbs');
 let complexMovieTemplate = require('./complexMovieTemplate.hbs');
 
 
-function buildSimpleMovieObj(movieData) {
+function buildSimpleMovieObj(movie) {
     let events = require('../../src/js/events.js')
     let userID = events.getUserID()
     let simpleMovie = {
-        title: movieData.Title,
-        year: movieData.Year,
-        posterURL: movieData.Poster,
+        title: movie.Title,
+        year: movie.Year,
+        posterURL: movie.Poster,
         uid: userID
     }
     console.log("constructed simple movie", simpleMovie)
