@@ -7,6 +7,7 @@ function searchMovies(searchTerm) {
     $.ajax({
       url: `${api}s=${searchTerm}`
     }).done(function(movies){
+      console.log(movies)
       resolve(movies);
     });
   });
