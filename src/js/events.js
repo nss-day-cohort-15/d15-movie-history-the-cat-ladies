@@ -13,8 +13,9 @@ function setEvents () {
         console.log("current user", result.user)
         let user = result.user
         userID = user.uid
+        $('#auth-button').unbind().attr('id','logout').html('LogOut')
         console.log("user ID", userID)
-          })
+        })
     });
 
     $('#search-button').click(function () {
