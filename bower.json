@@ -1,0 +1,23 @@
+{
+  "name": "cr-boilerplate",
+  "authors": [
+    "Casey Reed <casey.w.reed@gmail.com>",
+    "Liz Sanger",
+    "Dayne Wright"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.1.0"
+  }
+}
