@@ -17,8 +17,7 @@ function setEvents () {
     });
 
     $('#search-button').click(function () {
-        // GRABS VALUE FROM INPUT
-        // getMovies(VALUE)
+        console.log("Searching for movie")
     })
 }
 
