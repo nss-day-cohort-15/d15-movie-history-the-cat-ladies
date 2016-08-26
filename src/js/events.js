@@ -24,7 +24,9 @@ function setEvents () {
         console.log("Searching for movie")
         let userSearch = $('#userInput').val()
         omdb.searchMovies(userSearch)
-        .then(function (movies) {domBuilder(movies)})
+        .then(function (movies) {
+          domBuilder(movies);
+        })
     })
 }
 
