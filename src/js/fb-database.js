@@ -35,7 +35,7 @@ function deleteMovie(movieID) {
   });
 }
 
-function editMovieRating(movieObj, movieId) {
+function editMovieRating(movieObj, movieID) {
   return new Promise(function(resolve, reject){
     $.ajax({
       url: `${url}/movies/${movieID}.json`,

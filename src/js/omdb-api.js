@@ -1,11 +1,11 @@
-'use strict';
+"use strict";
 
 let api = `http://www.omdbapi.com/?`;
 
 function searchMovies(searchTerm) {
   return new Promise(function(resolve, reject){
     $.ajax({
-      url: `${url}s=${searchTerm}`
+      url: `${api}s=${searchTerm}`
     }).done(function(movies){
       resolve(movies);
     });
@@ -13,9 +13,9 @@ function searchMovies(searchTerm) {
 }
 
 function getSingleMovie(movie) {
-  return new Promise(function){
+  return new Promise(function(resolve, reject){
     $.ajax({
-      url: `${url}t=${movie.title}&y=${movie.year}`
+      url: `${api}t=${movie.title}&y=${movie.year}`
     }).done(function(movie){
       resolve(movie);
     });
