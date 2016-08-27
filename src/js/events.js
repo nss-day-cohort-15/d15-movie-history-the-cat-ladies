@@ -17,6 +17,7 @@ function setEvents () {
         userID = user.uid
         $('#auth-button').unbind().attr('id','logout').html('LogOut')
         console.log("user ID", userID)
+        $('#inputGroup').removeClass('hidden')
         })
     });
 
