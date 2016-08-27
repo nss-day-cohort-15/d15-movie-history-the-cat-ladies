@@ -47,9 +47,21 @@ function editMovieRating(movieObj, movieID) {
   });
 }
 
+function showSavedMovies(userID) {
+  return new Promise(function( resolve, reject) {
+    $.ajax({
+      url: `${url}/movies/json?orderBy="uid"&equalTo="${userID}"`
+    }).done(function(movies) {
+      console.log("inside showSavedMovies", movies );
+      resolve(movies);
+    });
+  });
+}
+
 module.exports = {
   getMovies,
   addMovie,
   deleteMovie,
-  editMovieRating
+  editMovieRating,
+  showSavedMovies
 };

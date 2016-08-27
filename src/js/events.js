@@ -3,7 +3,7 @@
 let login = require('./user.js');
 let omdb = require('./omdb-api');
 let domBuilder = require('./dom-builder.js');
-
+let fb = require('./fb-database.js')
 
 let userID = null;
 
@@ -36,6 +36,12 @@ function setEvents () {
         $('#userInput').focus();
         console.log('findNew button clicked');
     })
+
+    $('#searchMovie').click(function(){
+           console.log('insidesearchmovie')
+           console.log(userID)
+           fb.showSavedMovies(userID);
+        })
 }
 
 function getUserID () {
