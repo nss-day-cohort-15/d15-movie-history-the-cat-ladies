@@ -1,9 +1,10 @@
 "use strict";
 
-
 let simpleMovieTemplate = require('../../templates/article/simpleMovieTemplate.hbs');
 let complexMovieTemplate = require('../../templates/article/complexMovieTemplate.hbs');
 let objectBuilders = require('../../templates/article/build-movie-object.js');
+let fb = require('./fb-database');
+let omdb = require('./omdb-api');
 
 function outputToDomSimple(movieData) {
     $('#initialSearchOutput').html("");
@@ -16,9 +17,21 @@ function outputToDomSimple(movieData) {
       $('#initialSearchOutput').append(output);
     })
 
-    $('.saveButton').click(function(evt){
-      var name = $(this).parent().parent().find('h3').html();
-      var year = $(this).parent().parent().find('h4').html();
+    $('.saveButton').click(function(){
+      let clicked = this;
+      let movieObj = {
+        title: $(clicked).parent().parent().find('h3').html(),
+        year: $(clicked).parent().parent().find('h4').html()
+      }
+      //get movie from API
+      omdb.getSingleMovie(movieObj)
+        .then(function(movie){
+          fb.addMovie(objectBuilders.buildComplexMovieObj(movie))
+            .then(function(movie){
+              console.log('movie saved: ' , movie);
+              $(clicked).html('SAVED').removeClass('btn-primary').addClass('btn-success').attr('disabled', 'disabled');
+            });
+        });
     });
 
 }
