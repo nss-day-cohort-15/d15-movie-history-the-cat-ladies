@@ -1,3 +1,5 @@
+{{#each this}}
+
 <div class="panel panel-primary col-md-4 movie-card">
   <div class="panel-heading">
     <h3>{{title}}</h3>
@@ -7,8 +9,15 @@
     <img src="{{posterURL}}">
     <p>{{actors}}</p>
   </div>
-  <div class="panel-footer">
+  <div id="{{id}}" class="panel-footer">
     <button type="button" class="deleteButton btn btn-danger btn-sm">Delete This Movie</button>
+  {{#if watched}}
+    <button type="button" class="watched btn btn-success btn-sm">Watched</button>
+  {{else}}
+    <button type="button" class="watched btn btn-default btn-sm">UnWatched</button>
+  {{/if}}
     <h4>Movie Rating: {{rating}}</h4>
   </div>
 </div>
+
+{{/each}}

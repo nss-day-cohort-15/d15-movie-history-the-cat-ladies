@@ -2,6 +2,7 @@
 
 let login = require('./user.js'),
     omdb = require('./omdb-api'),
+    fb = require('./fb-database'),
     domBuilder = require('./dom-builder.js'),
     template = require('../../templates/article/moviedom.hbs'),
     userID = null,
@@ -35,8 +36,15 @@ function setEvents () {
     })
 
     $("#savedMovies").click(function(){
-      console.log('clicked savedmovies')
       domBuilder.outputToDomComplex()
+      .then(function(){
+        $('.watched').click(function(){
+          console.log('clicked!')
+          let movieID = $(this).parent().attr('id')
+          fb.editMovie({watched: true}, movieID)
+
+        })
+      })
     })
 }
 
