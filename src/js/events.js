@@ -40,7 +40,10 @@ function setEvents () {
     $('#searchMovie').click(function(){
            console.log('insidesearchmovie')
            console.log(userID)
-           fb.showSavedMovies(userID);
+           fb.showSavedMovies(userID)
+           .then(function(data){
+            console.log('data', data)
+           });
         })
 }
 
