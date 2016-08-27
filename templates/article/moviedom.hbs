@@ -1,0 +1,28 @@
+{{#if displayName}}
+
+<div class="row">
+    <div class="col-md-offset-3 col-md-6">
+        <div class="input-group">
+            <input type="text" id="userInput" class="form-control" placeholder="Search for Movies">
+            <span class="input-group-btn">
+                <button id="search-button" class="btn btn-success" type="button">Go!</button>
+            </span>
+        </div>
+    </div>
+</div>
+
+<section>
+  <div class="row">
+      <div id="initialSearchOutput"></div>
+  </div>
+</section>
+
+{{else}}
+
+<div class="row">
+  <div class="col-md-offset-3 col-md-8">
+    <h2>LOGIN TO SEARCH AND SAVE MOVIES!</h2>
+  </div>
+</div>
+
+{{/if}}

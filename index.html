@@ -1,63 +1,49 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>The Cat Ladies' Movie Database</title>
-    <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="src/css/main.css">
-</head>
-<body>
+    <head>
+        <title>The Cat Ladies' Movie Database</title>
+        <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="src/css/main.css">
+    </head>
+    <body>
 
-<div class='container'>
-<div class="navbar navbar-default" id="navbar">
-<div class="btn-group btn-group-justified" role="group" aria-label="...">
-  <div class="btn-group" role="group">
-    <button type="button" class="btn btn-default" id="findNew">Find New Movies</button>
-  </div>
-  <div class="btn-group" role="group">
-    <button type="button" class="btn btn-default" id="searchMovie">Search Your Movies</button>
-  </div>
-  <div class="btn-group" role="group">
-    <button type="button" id="auth-button" class="btn btn-default" id="login">Login</button>
-  </div>
-</div>
-</div>
+        <div class='container'>
+            <nav class="navbar navbar-default" id="navbar">
+                <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default" id="findNew">Find New Movies</button>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default" id="savedMovies">Search Your Movies</button>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button type="button" id="auth-button" class="btn btn-default" id="login">Login</button>
+                    </div>
+                </div>
+            </nav>
 
-<div class="row">
-  <div class="col-md-offset-3 col-md-6">
-    <div class="input-group">
-      <input type="text" id="userInput" class="form-control" placeholder="Search for Movies">
-      <span class="input-group-btn">
-        <button id="search-button" class="btn btn-success" type="button">Go!</button>
-      </span>
-    </div><!-- /input-group -->
-  </div><!-- /.col-lg-6 -->
-</div><!-- /.row -->
+          <section id="main-container">
+            <!-- <div class="row">
+                <div class="col-md-offset-3 col-md-6">
+                    <div class="input-group">
+                        <input type="text" id="userInput" class="form-control" placeholder="Search for Movies">
+                        <span class="input-group-btn">
+                            <button id="search-button" class="btn btn-success" type="button">Go!</button>
+                        </span>
+                    </div>
+                </div>
+            </div> -->
+          </section>
 
-<!-- <input type="text" class="form-control" id="userInput">
-<button type="button" class="btn btn-success" >Search for a Movie</button> -->
-<!--     <h1>Search for movies to watch alone with a microwave dinner</h1>
-  <div class="container">
-    <nav class="row box">
-      <div class="nav-wrapper">
-        <ul id="nav-mobile" class="left nav__links">
-          <li id="find-new"><a href="#" title="">Find New Movies</a></li>
-          <li id="search-new"><a href="#" title="">Search New Movies</a></li>
-          <li id="login-register-logout"><a class="last" href="#" title="">Login/Register/Logout</a></li>
-        </ul>
-      </div>
-    </nav>
-    <div class="uiContainer row">
-      <section class="uiContainer-wrapper col s9"> -->
-    <!--   </section>
-    </div>
-  </div> -->
-<div class="row">
-<div id="initialSearchOutput"></div>
-</div>
-</div>
+          <section>
+            <div class="row">
+                <div id="initialSearchOutput"></div>
+            </div>
+          </section>
+        </div>
 
-<script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
-<script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="dist/app.js"></script>
-</body>
+        <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+        <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="dist/app.js"></script>
+    </body>
 </html>

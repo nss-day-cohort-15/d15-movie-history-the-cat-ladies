@@ -36,19 +36,21 @@ function outputToDomSimple(movieData) {
 
 }
 
-// function outputToDomComplex(movie) {
+function outputToDomComplex(){
+  let userID = require('./events').getUserID();
+  $('#initialSearchOutput').html('')
 
-//     let complexMovieObject = buildComplexMovieObj(movie);
-//     let output = complexMovieTemplate(complexMovieObject);
-//     $('#initialSearchOutput').append(output)
-// }
-// }
+  fb.getMovies()
+    .then(function(movies){
+      let output
+      console.log(movies)
+      for(var movie in movies){
+        if(movies[movie].uid === userID){
+          output = complexMovieTemplate(movies[movie])
+          $('#initialSearchOutput').append(output)
+        }
+      }
+    })
+}
 
-// function (movieObj) {
-//   $('#initialSearchOutput').append()
-// }
-
-
-
-
-module.exports = outputToDomSimple;
+module.exports = {outputToDomSimple, outputToDomComplex};

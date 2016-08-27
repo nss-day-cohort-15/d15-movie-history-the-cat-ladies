@@ -1,44 +1,65 @@
 "use strict";
 
-let login = require('./user.js');
-let omdb = require('./omdb-api');
-let domBuilder = require('./dom-builder.js');
-
-
-let userID = null;
+let login = require('./user.js'),
+    omdb = require('./omdb-api'),
+    domBuilder = require('./dom-builder.js'),
+    template = require('../../templates/article/moviedom.hbs'),
+    userID = null,
+    user = null
 
 function setEvents () {
+  addTemplate(user)
+
     $("#auth-button").click(function() {
-        console.log('auth running')
+        //login the user
         login()
         .then(function (result) {
-        console.log("current user", result.user)
-        let user = result.user
-        userID = user.uid
-        $('#auth-button').unbind().attr('id','logout').html('LogOut')
-        console.log("user ID", userID)
+          //set user and ID on global
+          user = result.user
+          userID = user.uid
+          //update dom & add logout ID
+          addTemplate(user)
+          //add search click event
+          addSearchEvent()
+          $('#auth-button').unbind().attr('id','logout').html('LogOut')
+          console.log("user ID", user)
         })
     });
-
-    $('#search-button').click(function () {
-        console.log("Searching for movie")
-        let userSearch = $('#userInput').val()
-        omdb.searchMovies(userSearch)
-        .then(function (movies) {
-          domBuilder(movies);
-        })
-    })
 
     $("#findNew").click(function (){
         $('#initialSearchOutput').html('');
         $("#userInput").val('');
         $('#userInput').focus();
-        console.log('findNew button clicked');
+        addTemplate(user)
+        addSearchEvent()
+    })
+
+    $("#savedMovies").click(function(){
+      console.log('clicked savedmovies')
+      domBuilder.outputToDomComplex()
     })
 }
 
 function getUserID () {
     return userID;
+}
+
+function addTemplate(user){
+  $('#main-container').html(template(user))
+}
+
+function addSearchEvent(){
+  //add search click
+  $('#search-button').click(function () {
+      //get search value
+      let userSearch = $('#userInput').val()
+      //find movies
+      omdb.searchMovies(userSearch)
+      .then(function (movies) {
+        //add to dom
+        domBuilder.outputToDomSimple(movies);
+      })
+  })
 }
 
 module.exports = {setEvents, getUserID}
