@@ -18,6 +18,8 @@ function setEvents () {
           //set user and ID on global
           user = result.user
           userID = user.uid
+          let loginToast = `<span><img class="login-img" src="${user.photoURL}"><h6>${user.displayName} successfully logged in!</h6></span>`
+          Materialize.toast(loginToast, 2000)
           //update dom & add logout ID
           addTemplate(user)
           //add search click event

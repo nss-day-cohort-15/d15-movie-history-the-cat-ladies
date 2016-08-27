@@ -47,13 +47,12 @@ function outputToDomComplex(){
     })
     .then(function(){
       $('.deleteButton').click(function(){
-          let clicked = this
-          let movieID = $(clicked).parent().attr('id')
-
+          let movieID = $(this).parent().attr('id')
+          //delete move from firebase and remove from DOM
           fb.deleteMovie(movieID)
-            .then(function(data){
-              console.log( 'movie deleted')
-              $(`#${movieID}`).parent().remove()
+            .then(function(){
+              Materialize.toast(`<h6>Movie was deleted!</h6>`, 2000)
+              $(`#${movieID}`).parent().fadeOut()
             })
       })
     })
