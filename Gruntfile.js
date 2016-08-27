@@ -14,7 +14,7 @@ module.exports = function(grunt) {
     jshint: {
       options: {
         esversion: 6,
-        predef: [ "document", "console" ],
+        predef: [ "document", "console", "Materialize" ],
         jquery: true,
         globalstrict: true,
         globals: {},
