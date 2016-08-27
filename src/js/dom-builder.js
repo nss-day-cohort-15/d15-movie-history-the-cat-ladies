@@ -40,22 +40,23 @@ function outputToDomSimple(movieData) {
 }
 
 function outputToDomComplex(){
-
-  fb.getMovies()
-    .then(function(movies){
-      loadMoviesUser(movies)
-    })
-    .then(function(){
-      $('.deleteButton').click(function(){
-          let movieID = $(this).parent().attr('id')
-          //delete move from firebase and remove from DOM
-          fb.deleteMovie(movieID)
+  return new Promise(function(resolve, reject){
+      fb.getMovies()
+      .then(function(movies){
+        loadMoviesUser(movies)
+      })
+      .then(function(){
+        $('.deleteButton').click(function(){
+            let movieID = $(this).parent().attr('id')
+            //delete move from firebase and remove from DOM
+            fb.deleteMovie(movieID)
             .then(function(){
               Materialize.toast(`<h6>Movie was deleted!</h6>`, 2000)
               $(`#${movieID}`).parent().fadeOut()
             })
+        })
       })
-    })
+  })
 }
 
 function loadMoviesUser(movies){
