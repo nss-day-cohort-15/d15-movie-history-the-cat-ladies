@@ -4,6 +4,17 @@ h1 {
     color: $my-header-color;
 }
 
+#userInput {
+  font-size: 20px;
+}
+
 .movie-card-image {
     width: 80%;
+}
+
+.login-img {
+  width: 25%;
+  margin: 0 auto;
+  display: block;
+  border-radius: 50px;
 }
