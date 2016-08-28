@@ -38,13 +38,13 @@ function setEvents () {
     })
 
     $("#savedMovies").click(function(){
+      console.log('saved clicked')
       domBuilder.outputToDomComplex()
       .then(function(){
         $('.watched').click(function(){
           console.log('clicked!')
           let movieID = $(this).parent().attr('id')
-          fb.editMovie({watched: true}, movieID)
-
+          //fb.editMovie({watched: true}, movieID)
         })
       })
     })

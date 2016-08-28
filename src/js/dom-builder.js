@@ -39,31 +39,44 @@ function outputToDomSimple(movieData) {
 
 }
 
+//get movies that match the user and push to DOM
 function outputToDomComplex(){
   return new Promise(function(resolve, reject){
-      fb.getMovies()
-      .then(function(movies){
-        loadMoviesUser(movies)
-      })
-      .then(function(){
-        $('.deleteButton').click(function(){
-            let movieID = $(this).parent().attr('id')
-            //delete move from firebase and remove from DOM
-            fb.deleteMovie(movieID)
-            .then(function(){
-              Materialize.toast(`<h6>Movie was deleted!</h6>`, 2000)
-              $(`#${movieID}`).parent().fadeOut()
-            })
-        })
-      })
+    fb.getMovies()
+    .then(function(movies){
+      loadMoviesUser(movies)
+    }).then(function(){
+      $('.deleteButton').click(deleteButton)
+      $('.watched').click(toggleWatched)
+    })
+    resolve()
   })
 }
 
+//delete move from firebase and remove from DOM
+function deleteButton(evt){
+  let movieID = $(evt.target).parent().attr('id')
+
+  fb.deleteMovie(movieID)
+  Materialize.toast(`<h6>Movie was deleted!</h6>`, 2000)
+  $(`#${movieID}`).parent().remove()
+}
+
+function toggleWatched(evt){
+  $(evt.target).text(function(i, text){
+    return text === "UnWatched" ? "Watched" : "UnWatched"
+  }).toggleClass('btn-success')
+}
+
 function loadMoviesUser(movies){
+  //reset userMovies to empy obj each time called
+  userMovies = {}
+
   return new Promise(function(resolve, reject){
     let userID = require('./events').getUserID()
     let output
     let i = 0
+
     //build movies object for specific user
     for(var movie in movies){
       if(movies[movie].uid === userID){
