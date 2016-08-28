@@ -43,6 +43,7 @@ function setEvents () {
            fb.showSavedMovies(userID)
            .then(function(data){
             console.log('data', data)
+
            });
         })
 }

@@ -48,7 +48,7 @@ function outputToDomSimple(movieData) {
 //   $('#initialSearchOutput').append()
 // }
 
-
+//THINGS TO TRY: OUTPUT COMPLEX MOVIE TO DOM WITH STRAIGHT DB/NON FILTERED CALL, HERE WRITE OUTPUTTODOMCOMPLEXMOVIE
 
 
 module.exports = outputToDomSimple;
