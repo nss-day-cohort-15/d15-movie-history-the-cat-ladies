@@ -1,4 +1,5 @@
 $my-header-color: red;
+$precious: url('https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRQygKc_ZHNOsOSaJLwumRhXns885jUvYJshMD9cZ0OISqnFeUC');
 
 h1 {
     color: $my-header-color;
@@ -6,4 +7,9 @@ h1 {
 
 .movie-card-image {
     width: 80%;
+}
+
+body {
+
+background-image: $precious;
 }

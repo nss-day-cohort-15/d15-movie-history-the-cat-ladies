@@ -28,7 +28,13 @@ function outputToDomComplex(savedMovies) {
       for (var key in savedMovies){
         let savedMovieID = i
         console.log(savedMovieID)
-      } //movie deleted from fb onClick of delete button
+        fb.delete(savedMovieID)
+
+      }
+        fb.getMovies()
+       .then(function (movieData){
+          console.log(movieData)
+        })
       })
    })
 
