@@ -39,12 +39,9 @@ function setEvents () {
     })
 
     $('#searchMovie').click(function(){
-           console.log('insidesearchmovie')
-           console.log(userID)
            fb.getMovies()
-           .then(function(movieData){
-            console.log('data', movieData)
-            complexDomBuilder(movieData)
+           .then(function(movies){
+            complexDomBuilder(movies)
            });
         })
 }

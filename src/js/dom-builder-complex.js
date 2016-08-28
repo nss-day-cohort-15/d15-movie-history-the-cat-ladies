@@ -9,18 +9,13 @@ let omdb = require('./omdb-api');
 function outputToDomComplex(savedMovies) {
     let savedMoviesarr = [];
     $('#savedMovieOutput').html("");
-
-    console.log("inside outputToDomComplex")
-    console.log("savedMovies", savedMovies)
     for (var i in savedMovies) {
       savedMoviesarr.push(savedMovies[i])
     }
     savedMoviesarr.forEach(function(savedMovie) {
-      let complexMovieObj = objectBuilders.buildComplexMovieObj(savedMovie);
-      let savedMovieOutput = complexMovieTemplate(complexMovieObj);
+      let savedMovieOutput = complexMovieTemplate(savedMovie);
       $('#savedMovieOutput').append(savedMovieOutput);
     })
-
 }
 
 
