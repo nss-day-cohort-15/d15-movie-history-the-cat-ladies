@@ -1,22 +1,37 @@
 "use strict";
 
-let simpleMovieTemplate = require('../../templates/article/simpleMovieTemplate.hbs');
 let complexMovieTemplate = require('../../templates/article/complexMovieTemplate.hbs');
-let objectBuilders = require('../../templates/article/build-movie-object.js');
 let fb = require('./fb-database');
-let omdb = require('./omdb-api');
 
 function outputToDomComplex(savedMovies) {
     let savedMoviesarr = [];
     $('#savedMovieOutput').html("");
     for (var i in savedMovies) {
+
       savedMoviesarr.push(savedMovies[i])
     }
-    savedMoviesarr.forEach(function(savedMovie) {
-      let savedMovieOutput = complexMovieTemplate(savedMovie);
-      $('#savedMovieOutput').append(savedMovieOutput);
-    })
-}
+    savedMoviesarr.forEach(function(savedMovie, i) {
+        if (savedMovie.watched === false) {
+          console.log('unwatched')
+          savedMovie.watched = "Your cats haven't seen this yet!"
+        }
 
+        else {
+          savedMovie.watched = "Your cats have seen it." //in here we can disable hidden classes on rating and selectbox in complexMovieTemplate.hbs instead of placeholder text above
+        }
+
+        let savedMovieOutput = complexMovieTemplate(savedMovie);
+        $('#savedMovieOutput').append(savedMovieOutput);
+
+
+     $('.deleteButton').click(function(){
+      for (var key in savedMovies){
+        let savedMovieID = i
+        console.log(savedMovieID)
+      } //movie deleted from fb onClick of delete button
+      })
+   })
+
+   }
 
 module.exports = outputToDomComplex

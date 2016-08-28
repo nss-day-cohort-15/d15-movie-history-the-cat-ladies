@@ -25,7 +25,6 @@ function buildComplexMovieObj(simpleMovieObj) {
         watched: false,
         rating: 0
     }
-    // console.log("constructed complex movie", complexMovie)
     return complexMovie
 }
 

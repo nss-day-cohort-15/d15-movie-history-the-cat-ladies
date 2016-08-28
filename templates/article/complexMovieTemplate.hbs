@@ -9,7 +9,14 @@
   <div class="panel-footer">
   <button type="button" class="deleteButton">Delete This Movie</button>
   <h4>{{watched}}</h4>
-  <h4>Movie Rating: {{rating}}</h4>
+  <h4 class="hidden">Your Rating: {{rating}} </h4>
+  <select class="hidden" id="ratingMenu">
+  <option value="1">1</option>
+  <option value="2">2</option>
+  <option value="3">3</option>
+  <option value="4">4</option>
+  <option value="5">5</option>
+</select>
   </div>
 </div>
 

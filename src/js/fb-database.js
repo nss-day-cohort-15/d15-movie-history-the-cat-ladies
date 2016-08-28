@@ -11,7 +11,7 @@ function getMovies() {
       resolve(movieData);
     });
   });
-}
+} //right now, using this to retrieve saved movies, but should probably be showSavedMovies () function below instead, so that userID is specified. Wanted to be sure we could at least output complex movies to DOM in the meantime.
 
 function addMovie(movieObj) {
   return new Promise(function(resolve, reject){
