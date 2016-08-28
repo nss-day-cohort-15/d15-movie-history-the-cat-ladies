@@ -6,15 +6,15 @@ let objectBuilders = require('../../templates/article/build-movie-object.js');
 let fb = require('./fb-database');
 let omdb = require('./omdb-api');
 
-function outputToDomSimple(movieData) {
-    $('#initialSearchOutput').html("");
+function outputToDomSimple(movieData) { //called by events.js (search movies(userSearch))
+    $('#initialSearchOutput').html(""); //clears DOM prior to filling it
 
     console.log("inside outputToDomSimple")
     console.log("movie data", movieData)
-    movieData.Search.forEach(function(movie) {
-      let simpleMovieObject = objectBuilders.buildSimpleMovieObj(movie);
-      let output = simpleMovieTemplate(simpleMovieObject);
-      $('#initialSearchOutput').append(output);
+    movieData.Search.forEach(function(movie) { //for each movie in arr returned by OMDB
+      let simpleMovieObject = objectBuilders.buildSimpleMovieObj(movie); //each movie passed into buildSimpleMovieObj function, which runs each movie through the simple movie template
+      let output = simpleMovieTemplate(simpleMovieObject); //output defined as each templated movie
+      $('#initialSearchOutput').append(output); //output appended to DOM
     })
 
     $('.saveButton').click(function(){
@@ -35,20 +35,6 @@ function outputToDomSimple(movieData) {
     });
 
 }
-
-// function outputToDomComplex(movie) {
-
-//     let complexMovieObject = buildComplexMovieObj(movie);
-//     let output = complexMovieTemplate(complexMovieObject);
-//     $('#initialSearchOutput').append(output)
-// }
-// }
-
-// function (movieObj) {
-//   $('#initialSearchOutput').append()
-// }
-
-//THINGS TO TRY: OUTPUT COMPLEX MOVIE TO DOM WITH STRAIGHT DB/NON FILTERED CALL, HERE WRITE OUTPUTTODOMCOMPLEXMOVIE
 
 
 module.exports = outputToDomSimple;

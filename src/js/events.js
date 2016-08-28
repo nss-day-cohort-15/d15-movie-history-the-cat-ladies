@@ -3,6 +3,7 @@
 let login = require('./user.js');
 let omdb = require('./omdb-api');
 let domBuilder = require('./dom-builder.js');
+let complexDomBuilder = require('./dom-builder-complex.js')
 let fb = require('./fb-database.js')
 
 let userID = null;
@@ -40,10 +41,10 @@ function setEvents () {
     $('#searchMovie').click(function(){
            console.log('insidesearchmovie')
            console.log(userID)
-           fb.showSavedMovies(userID)
-           .then(function(data){
-            console.log('data', data)
-
+           fb.getMovies()
+           .then(function(movieData){
+            console.log('data', movieData)
+            complexDomBuilder(movieData)
            });
         })
 }

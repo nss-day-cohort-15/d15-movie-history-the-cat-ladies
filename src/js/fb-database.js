@@ -50,7 +50,7 @@ function editMovieRating(movieObj, movieID) {
 function showSavedMovies(userID) {
   return new Promise(function( resolve, reject) {
     $.ajax({
-      url: `${url}movies.json`,
+      url: `${url}movies.json?orderBy="uid"&equalTo"${userID}"`,
       type: 'GET'
     }).done(function(data) {
       console.log("inside showSavedMovies", data );
@@ -58,6 +58,7 @@ function showSavedMovies(userID) {
     });
   });
 }
+
 
 module.exports = {
   getMovies,
