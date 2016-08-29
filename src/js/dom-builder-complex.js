@@ -5,6 +5,7 @@ let fb = require('./fb-database');
 
 function outputToDomComplex(savedMovies) {
     let savedMoviesarr = [];
+
     $('#savedMovieOutput').html("");
     for (var i in savedMovies) {
 
@@ -12,7 +13,7 @@ function outputToDomComplex(savedMovies) {
     }
     savedMoviesarr.forEach(function(savedMovie, i) {
         if (savedMovie.watched === false) {
-          console.log('unwatched')
+
           savedMovie.watched = "Your cats haven't seen this yet!"
         }
 
@@ -24,20 +25,22 @@ function outputToDomComplex(savedMovies) {
         $('#savedMovieOutput').append(savedMovieOutput);
 
 
-     $('.deleteButton').click(function(){
-      for (var key in savedMovies){
-        let savedMovieID = i
-        console.log(savedMovieID)
-        fb.delete(savedMovieID)
 
-      }
-        fb.getMovies()
-       .then(function (movieData){
-          console.log(movieData)
-        })
+
+   })
+     // $('.deleteButton').click(function(){
+
+      let savedMoviesIDs = (Object.keys(savedMovies)) //need to target the specific key here and pass it into fb.deleteMovie function
+      // console.log(savedMoviesIDs)
+
+      savedMoviesIDs.forEach(function(savedMovieID){
+        $('.deleteButton').click(function(){
+        fb.deleteMovie(savedMovieID)
+        console.log(savedMoviesIDs) //sort of working: deleting every movie from database instead of one
+
       })
    })
 
-   }
+  }
 
 module.exports = outputToDomComplex
