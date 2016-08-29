@@ -10,22 +10,11 @@ let login = require('./user.js'),
 
 function setEvents () {
   addTemplate(user)
-
     $("#auth-button").click(function() {
         //login the user
         login()
         .then(function (result) {
-          //set user and ID on global
-          user = result.user
-          userID = user.uid
-          let loginToast = `<span><img class="login-img" src="${user.photoURL}"><h6>${user.displayName} successfully logged in!</h6></span>`
-          Materialize.toast(loginToast, 2000)
-          //update dom & add logout ID
-          addTemplate(user)
-          //add search click event
-          addSearchEvent()
-          $('#auth-button').unbind().attr('id','logout').html('LogOut')
-          console.log("user ID", user)
+          loginEvents(result)
         })
     });
 
@@ -47,6 +36,24 @@ function setEvents () {
           //fb.editMovie({watched: true}, movieID)
         })
       })
+    })
+
+    // Bread Crumb Buttons // Sorting Functions (LATER)
+
+    $("#untracked-button").click(function () {
+      $(".bread-target").html("Show Untracked")
+    })
+
+    $("#unwatched-button").click(function () {
+      $(".bread-target").html("Show Unwatched")
+    })
+
+    $("#watched-button").click(function () {
+      $(".bread-target").html("Show Watched")
+    })
+
+    $("#favorites-button").click(function () {
+      $(".bread-target").html("Show Favorites")
     })
 }
 
@@ -72,4 +79,18 @@ function addSearchEvent(){
   })
 }
 
+function loginEvents (result) {
+  //set user and ID on global
+  user = result.user
+  userID = user.uid
+  let loginToast = `<span><img class="login-img" src="${user.photoURL}"><h6>${user.displayName} successfully logged in!</h6></span>`
+  Materialize.toast(loginToast, 2000)
+  //update dom & add logout ID
+  addTemplate(user)
+  //add search click event
+  addSearchEvent()
+  $('#auth-button').unbind().attr('id','logout').html('LogOut')
+  setEvents()
+  console.log("user ID", user)
+}
 module.exports = {setEvents, getUserID}
