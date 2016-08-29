@@ -47,6 +47,23 @@ function setEvents () {
 
     $("#unwatched-button").click(function () {
       $(".bread-target").html("Show Unwatched")
+      fb.getMovies(userID)
+      .then(function (movieData) {
+        let selectedUserMovies = []
+        for (var movie in movieData) {
+        if (!movieData[movie].watched) {
+        // movieData[movie].id = movie
+        // console.log("movieData[movie].id", movieData[movie].id)
+        selectedUserMovies.push(movieData[movie])
+        // console.log("selectedUserMovies", selectedUserMovies)
+      }
+    }
+      $("#initialSearchOutput").html("")
+      domBuilder.loadMoviesUser(selectedUserMovies)
+      setRating($('.rating'), movieData)
+      $('.deleteButton').click(domBuilder.deleteButton)
+      $('.watched').click(domBuilder.toggleWatched)
+      })
     })
 
     $("#watched-button").click(function () {
