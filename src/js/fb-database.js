@@ -8,6 +8,7 @@ function getMovies(uid) {
     $.ajax({
       url: `${url}/movies.json?orderBy="uid"&equalTo="${uid}"`
     }).done(function(movieData){
+      console.log("movieData in get movies", movieData)
       resolve(movieData);
     });
   });

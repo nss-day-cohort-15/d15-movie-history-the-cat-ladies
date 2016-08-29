@@ -51,6 +51,7 @@ function setEvents () {
 
     $("#watched-button").click(function () {
       $(".bread-target").html("Show Watched")
+
     })
 
     $("#favorites-button").click(function () {
