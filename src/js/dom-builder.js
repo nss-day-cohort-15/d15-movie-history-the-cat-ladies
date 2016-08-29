@@ -5,7 +5,7 @@ let complexMovieTemplate = require('../../templates/article/complexMovieTemplate
 let objectBuilders = require('../../templates/article/build-movie-object.js')
 let fb = require('./fb-database')
 let omdb = require('./omdb-api')
-let setRating = require('./rating')
+
 let watched = require('./watched')
 let moviesObj = {}
 let userMovies = {}
@@ -42,22 +42,22 @@ function outputToDomSimple(movieData) {
 }
 
 //get movies that match the user and push to DOM
-function outputToDomComplex(){
-  let uid = require('./events').getUserID()
+// function outputToDomComplex(){
+//   let uid = require('./events').getUserID()
 
-  return new Promise(function(resolve, reject){
-    fb.getMovies(uid)
-    .then(function(movies){
-      loadMoviesUser(movies)
-      .then(function(userMovies){
-        setRating($('.rating'), userMovies)
-        $('.deleteButton').click(deleteButton)
-        $('.watched').click(toggleWatched)
-      })
-    })
-    resolve()
-  })
-}
+//   return new Promise(function(resolve, reject){
+//     fb.getMovies(uid)
+//     .then(function(movies){
+//       loadMoviesUser(movies)
+//       .then(function(userMovies){
+//         setRating($('.rating'), userMovies)
+//         $('.deleteButton').click(deleteButton)
+//         $('.watched').click(toggleWatched)
+//       })
+//     })
+//     resolve()
+//   })
+// }
 
 //delete move from firebase and remove from DOM
 function deleteButton(evt){
@@ -96,8 +96,9 @@ function loadMoviesUser(movies){
     }
     output = complexMovieTemplate(movies)
     $('#initialSearchOutput').prepend(output)
+
     resolve(userMovies)
   })
 }
 
-module.exports = {outputToDomSimple, outputToDomComplex, loadMoviesUser}
+module.exports = {outputToDomSimple, loadMoviesUser, deleteButton, toggleWatched}
