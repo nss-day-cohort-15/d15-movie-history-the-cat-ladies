@@ -4,7 +4,7 @@
 function setRating(el, moviesObj){
 
   // max rating, i.e. number of stars you want
-  let maxRating = 5;
+  let maxRating = 10;
   // callback to run after setting the rating
   let saveRatingFB = function(ratingID){
     //this will only work in Chrome until I can figure out a way to get the evt param passed in
