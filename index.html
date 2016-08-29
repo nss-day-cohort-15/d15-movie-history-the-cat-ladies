@@ -7,8 +7,8 @@
 </head>
 <body>
 
-<div class='container'>
-<div class="navbar navbar-default" id="navbar">
+<div class="row">
+<div class="container">
 <div class="btn-group btn-group-justified" role="group" aria-label="...">
   <div class="btn-group" role="group">
     <button type="button" class="btn btn-default" id="findNew">Find New Movies</button>
@@ -21,10 +21,12 @@
   </div>
 </div>
 </div>
+</div>
+
 
 <div class="row">
   <div class="col-md-offset-3 col-md-6">
-    <div class="input-group">
+    <div class="input-group hidden" id="inputGroup">
       <input type="text" id="userInput" class="form-control" placeholder="Search for Movies">
       <span class="input-group-btn">
         <button id="search-button" class="btn btn-success" type="button">Go!</button>
@@ -53,6 +55,7 @@
   </div> -->
 <div class="row">
 <div id="initialSearchOutput"></div>
+<div id="savedMovieOutput"></div>
 </div>
 </div>
 

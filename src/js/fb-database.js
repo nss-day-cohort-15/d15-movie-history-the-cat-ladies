@@ -11,7 +11,7 @@ function getMovies() {
       resolve(movieData);
     });
   });
-}
+} //right now, using this to retrieve saved movies, but should probably be showSavedMovies () function below instead, so that userID is specified. Wanted to be sure we could at least output complex movies to DOM in the meantime.
 
 function addMovie(movieObj) {
   return new Promise(function(resolve, reject){
@@ -47,9 +47,23 @@ function editMovieRating(movieObj, movieID) {
   });
 }
 
+function showSavedMovies(userID) {
+  return new Promise(function( resolve, reject) {
+    $.ajax({
+      url: `${url}movies.json?orderBy="uid"&equalTo"${userID}"`,
+      type: 'GET'
+    }).done(function(data) {
+      console.log("inside showSavedMovies", data );
+      resolve(data);
+    });
+  });
+}
+
+
 module.exports = {
   getMovies,
   addMovie,
   deleteMovie,
-  editMovieRating
+  editMovieRating,
+  showSavedMovies
 };

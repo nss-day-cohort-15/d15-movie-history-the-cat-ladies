@@ -3,7 +3,8 @@
 let login = require('./user.js');
 let omdb = require('./omdb-api');
 let domBuilder = require('./dom-builder.js');
-
+let complexDomBuilder = require('./dom-builder-complex.js')
+let fb = require('./fb-database.js')
 
 let userID = null;
 
@@ -17,6 +18,7 @@ function setEvents () {
         userID = user.uid
         $('#auth-button').unbind().attr('id','logout').html('LogOut')
         console.log("user ID", userID)
+        $('#inputGroup').removeClass('hidden')
         })
     });
 
@@ -34,6 +36,15 @@ function setEvents () {
         $("#userInput").val('');
         $('#userInput').focus();
         console.log('findNew button clicked');
+    })
+
+    $('#searchMovie').click(function(){
+        if (userID !== null) {
+           fb.getMovies()
+           .then(function(movies){
+            complexDomBuilder(movies)
+           });
+       }
     })
 }
 
