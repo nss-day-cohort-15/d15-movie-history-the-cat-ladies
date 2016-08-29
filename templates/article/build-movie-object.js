@@ -7,7 +7,8 @@ function buildSimpleMovieObj(movie) {
         title: movie.Title,
         year: movie.Year,
         posterURL: movie.Poster,
-        uid: userID
+        uid: userID,
+        imdbID: movie.imdbID
     }
     console.log("constructed simple movie", simpleMovie)
     return simpleMovie
@@ -23,7 +24,8 @@ function buildComplexMovieObj(simpleMovieObj) {
         uid: userID,
         actors: simpleMovieObj.Actors,
         watched: false,
-        rating: 0
+        rating: 0,
+        imdbID: simpleMovieObj.imdbID
     }
     return complexMovie
 }
