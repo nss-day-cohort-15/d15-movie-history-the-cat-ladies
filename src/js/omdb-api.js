@@ -5,7 +5,7 @@ let api = `http://www.omdbapi.com/?`;
 function searchMovies(searchTerm) {
   return new Promise(function(resolve, reject){
     $.ajax({
-      url: `${api}s=${searchTerm}`
+      url: `${api}type=movie&s=${searchTerm}`
     }).done(function(movies){
       console.log(movies)
       resolve(movies);
