@@ -6,6 +6,7 @@ let objectBuilders = require('../../templates/article/build-movie-object.js')
 let fb = require('./fb-database')
 let omdb = require('./omdb-api')
 let setRating = require('./rating')
+let watched = require('./watched')
 let moviesObj = {}
 let userMovies = {}
 
@@ -33,6 +34,7 @@ function outputToDomSimple(movieData) {
           fb.addMovie(objectBuilders.buildComplexMovieObj(movie))
             .then(function(movie){
               $(clicked).html('SAVED').removeClass('btn-primary').addClass('btn-success').attr('disabled', 'disabled')
+              Materialize.toast(`<h6>Movie was saved!</h6>`, 2000)
             })
         })
     })
@@ -60,14 +62,20 @@ function deleteButton(evt){
   let movieID = $(evt.target).parent().attr('id')
 
   fb.deleteMovie(movieID)
-  Materialize.toast(`<h6>Movie was deleted!</h6>`, 2000)
-  $(`#${movieID}`).parent().remove()
+  .then(function(){
+    Materialize.toast(`<h6>Movie was deleted!</h6>`, 2000)
+    $(`#${movieID}`).parent().remove()
+  })
 }
 
 function toggleWatched(evt){
+  let watchedVal = $(evt.target).html()
+  let movieID = $(evt.target).parent().attr('id')
+  watched(watchedVal, movieID)
+
   $(evt.target).text(function(i, text){
     return text === "UnWatched" ? "Watched" : "UnWatched"
-  }).toggleClass('btn-success')
+  }).toggleClass('btn-success').toggleClass('btn-default')
 }
 
 function loadMoviesUser(movies){

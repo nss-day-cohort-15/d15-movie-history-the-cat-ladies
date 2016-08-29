@@ -1,7 +1,7 @@
 "use strict";
+  let fb = require('./fb-database')
 
 function setRating(el, moviesObj){
-  let fb = require('./fb-database')
 
   // max rating, i.e. number of stars you want
   let maxRating = 5;
@@ -11,7 +11,7 @@ function setRating(el, moviesObj){
     let movieID = $(event.target).parent().next().attr('id')
     let newRating = {rating : ratingID}
     fb.editMovie(newRating, movieID)
-    .then(() => console.log('rating saved'))
+    .then(() => Materialize.toast(`<h6>Movie rating was updated to ${newRating.rating}!</h6>`, 2000))
   }
 
   Array.from(el).forEach((e, i) => {
