@@ -51,6 +51,12 @@ function setEvents () {
 
     $("#watched-button").click(function () {
       $(".bread-target").html("Show Watched")
+      fb.getMovies(userID)
+      .then(function (movieData) {
+        console.log("inside the THEN function")
+        domBuilder.loadMoviesUser(movieData)
+        console.log("after loadMoviesUser")
+      })
 
     })
 
