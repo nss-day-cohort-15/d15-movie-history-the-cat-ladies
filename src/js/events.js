@@ -71,11 +71,35 @@ function addSearchEvent(){
       //get search value
       let userSearch = $('#userInput').val()
       //find movies
+      getUserMoviesSearch(userSearch)
+      .then(function () {
       omdb.searchMovies(userSearch)
       .then(function (movies) {
         //add to dom
+        console.log("movies inside the second promise", movies)
         domBuilder.outputToDomSimple(movies);
       })
+    })
+  })
+}
+
+function getUserMoviesSearch (userSearch) {
+  return new Promise (function (resolve, reject) {
+  console.log("inside getUserMoviesSearch")
+  fb.getMovies(userID)
+  .then(function (movieData) {
+    let selectedUserMovies = []
+    for (var movie in movieData) {
+      console.log("user search in the FOR IN loop", userSearch)
+      console.log("movieData in the FOR IN loop", movieData[movie].title)
+      if (movieData[movie].title == userSearch) {
+        selectedUserMovies.push(movieData[movie])
+        console.log("selectedUserMovies", selectedUserMovies)
+      }
+    }
+    domBuilder.loadMoviesUser(selectedUserMovies)
+    })
+  resolve()
   })
 }
 
