@@ -95,9 +95,9 @@ function loadMoviesUser(movies){
       i++
     }
     output = complexMovieTemplate(movies)
-    $('#initialSearchOutput').html(output)
+    $('#initialSearchOutput').prepend(output)
     resolve(userMovies)
   })
 }
 
-module.exports = {outputToDomSimple, outputToDomComplex}
+module.exports = {outputToDomSimple, outputToDomComplex, loadMoviesUser}
