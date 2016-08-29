@@ -5,6 +5,7 @@ let complexMovieTemplate = require('../../templates/article/complexMovieTemplate
 let objectBuilders = require('../../templates/article/build-movie-object.js')
 let fb = require('./fb-database')
 let omdb = require('./omdb-api')
+let setRating = require('./rating')
 let moviesObj = {}
 let userMovies = {}
 
@@ -31,7 +32,6 @@ function outputToDomSimple(movieData) {
         .then(function(movie){
           fb.addMovie(objectBuilders.buildComplexMovieObj(movie))
             .then(function(movie){
-              console.log('movie saved: ' , movie)
               $(clicked).html('SAVED').removeClass('btn-primary').addClass('btn-success').attr('disabled', 'disabled')
             })
         })
@@ -45,9 +45,11 @@ function outputToDomComplex(){
     fb.getMovies()
     .then(function(movies){
       loadMoviesUser(movies)
-    }).then(function(){
-      $('.deleteButton').click(deleteButton)
-      $('.watched').click(toggleWatched)
+      .then(function(userMovies){
+        setRating($('.rating'), userMovies)
+        $('.deleteButton').click(deleteButton)
+        $('.watched').click(toggleWatched)
+      })
     })
     resolve()
   })
@@ -82,14 +84,13 @@ function loadMoviesUser(movies){
       if(movies[movie].uid === userID){
         movies[movie].id = movie
         userMovies[`movie${i}`] = movies[movie]
-
         i++
       }
     }
     output = complexMovieTemplate(userMovies)
     $('#initialSearchOutput').html(output)
 
-    resolve()
+    resolve(userMovies)
   })
 }
 

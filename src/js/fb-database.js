@@ -1,12 +1,12 @@
 'use strict';
 
 let firebase = require("./firebaseConfig"),
-    url = 'https://cat-ladies-movie-history.firebaseio.com/';
+    url = 'https://cat-ladies-movie-history.firebaseio.com';
 
 function getMovies() {
   return new Promise(function(resolve, reject){
     $.ajax({
-      url: `${url}movies.json`
+      url: `${url}/movies.json`
     }).done(function(movieData){
       resolve(movieData);
     });
@@ -16,7 +16,7 @@ function getMovies() {
 function addMovie(movieObj) {
   return new Promise(function(resolve, reject){
     $.ajax({
-      url: `${url}movies.json`,
+      url: `${url}/movies.json`,
       type: 'POST',
       data: JSON.stringify(movieObj),
       dataType: 'json'
@@ -41,7 +41,7 @@ function editMovie(movieData, movieID) {
     $.ajax({
       url: `${url}/movies/${movieID}.json`,
       type: 'PATCH',
-      data: movieData
+      data: JSON.stringify(movieData)
     }).done(function(data){
         resolve(data);
     });

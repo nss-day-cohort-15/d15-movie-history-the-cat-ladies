@@ -9,6 +9,7 @@
     <img src="{{posterURL}}">
     <p>{{actors}}</p>
   </div>
+  <div class="rating c-rating"></div>
   <div id="{{id}}" class="panel-footer">
     <button type="button" class="deleteButton btn btn-danger btn-sm">Delete This Movie</button>
   {{#if watched}}
@@ -16,7 +17,6 @@
   {{else}}
     <button type="button" class="watched btn btn-default btn-sm">UnWatched</button>
   {{/if}}
-    <h4>Movie Rating: {{rating}}</h4>
   </div>
 </div>
 
