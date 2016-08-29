@@ -3,10 +3,10 @@
 let firebase = require("./firebaseConfig"),
     url = 'https://cat-ladies-movie-history.firebaseio.com';
 
-function getMovies() {
+function getMovies(uid) {
   return new Promise(function(resolve, reject){
     $.ajax({
-      url: `${url}/movies.json`
+      url: `${url}/movies.json?orderBy="uid"&equalTo="${uid}"`
     }).done(function(movieData){
       resolve(movieData);
     });

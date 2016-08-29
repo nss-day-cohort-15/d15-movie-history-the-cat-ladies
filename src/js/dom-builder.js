@@ -43,8 +43,10 @@ function outputToDomSimple(movieData) {
 
 //get movies that match the user and push to DOM
 function outputToDomComplex(){
+  let uid = require('./events').getUserID()
+
   return new Promise(function(resolve, reject){
-    fb.getMovies()
+    fb.getMovies(uid)
     .then(function(movies){
       loadMoviesUser(movies)
       .then(function(userMovies){
@@ -86,18 +88,14 @@ function loadMoviesUser(movies){
     let userID = require('./events').getUserID()
     let output
     let i = 0
-
     //build movies object for specific user
     for(var movie in movies){
-      if(movies[movie].uid === userID){
-        movies[movie].id = movie
-        userMovies[`movie${i}`] = movies[movie]
-        i++
-      }
+      movies[movie].id = movie
+      userMovies[`movie${i}`] = movies[movie]
+      i++
     }
-    output = complexMovieTemplate(userMovies)
+    output = complexMovieTemplate(movies)
     $('#initialSearchOutput').html(output)
-
     resolve(userMovies)
   })
 }
