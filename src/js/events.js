@@ -93,6 +93,7 @@ function getUserMoviesSearch (userSearch) {
     for (var movie in movieData) {
       if (movieData[movie].title == userSearch) {
         movieData[movie].id = movie
+        console.log("movieData[movie].id", movieData[movie].id)
         selectedUserMovies.push(movieData[movie])
         console.log("selectedUserMovies", selectedUserMovies)
       }
