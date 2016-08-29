@@ -83,7 +83,6 @@ function toggleWatched(evt){
 function loadMoviesUser(movies){
   //reset userMovies to empy obj each time called
   userMovies = {}
-
   return new Promise(function(resolve, reject){
     let userID = require('./events').getUserID()
     let output
