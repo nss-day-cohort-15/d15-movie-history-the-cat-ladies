@@ -51,8 +51,8 @@ function setEvents () {
       .then(function (movieData) {
         let selectedUserMovies = []
         for (var movie in movieData) {
-        if (!movieData[movie].watched) {
-        // movieData[movie].id = movie
+          if (!movieData[movie].watched) {
+        movieData[movie].id = movie
         // console.log("movieData[movie].id", movieData[movie].id)
         selectedUserMovies.push(movieData[movie])
         // console.log("selectedUserMovies", selectedUserMovies)
@@ -73,7 +73,7 @@ function setEvents () {
         let selectedUserMovies = []
         for (var movie in movieData) {
         if (movieData[movie].watched) {
-        // movieData[movie].id = movie
+        movieData[movie].id = movie
         // console.log("movieData[movie].id", movieData[movie].id)
         selectedUserMovies.push(movieData[movie])
         // console.log("selectedUserMovies", selectedUserMovies)
@@ -94,7 +94,7 @@ function setEvents () {
         let selectedUserMovies = []
         for (var movie in movieData) {
         if (movieData[movie].rating === 10) {
-        // movieData[movie].id = movie
+        movieData[movie].id = movie
         // console.log("movieData[movie].id", movieData[movie].id)
         selectedUserMovies.push(movieData[movie])
         // console.log("selectedUserMovies", selectedUserMovies)
