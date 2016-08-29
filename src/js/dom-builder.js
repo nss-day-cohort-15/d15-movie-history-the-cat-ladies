@@ -80,7 +80,7 @@ function toggleWatched(evt){
   }).toggleClass('btn-success').toggleClass('btn-default')
 }
 
-function loadMoviesUser(movies){
+function loadMoviesUser(movies, userID){
   //reset userMovies to empy obj each time called
   userMovies = {}
 
@@ -90,7 +90,7 @@ function loadMoviesUser(movies){
     let i = 0
     //build movies object for specific user
     for(var movie in movies){
-      // movies[movie].id = movie
+      movies[movie].id = movie
       userMovies[`movie${i}`] = movies[movie]
       i++
     }

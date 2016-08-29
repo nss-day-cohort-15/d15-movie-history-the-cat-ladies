@@ -73,41 +73,65 @@ function addSearchEvent(){
       let userSearch = $('#userInput').val()
       //find movies
       getUserMoviesSearch(userSearch)
-      .then(function () {
-      omdb.searchMovies(userSearch)
-      .then(function (movies) {
-        //add to dom
-        console.log("movies inside the second promise", movies)
-        domBuilder.outputToDomSimple(movies);
-      })
-    })
+    //   .then(function () {
+    //   omdb.searchMovies(userSearch)
+    //   .then(function (movies) {
+    //     //add to dom
+    //     console.log("movies inside the second promise", movies)
+    //     domBuilder.outputToDomSimple(movies);
+    //   })
+    // })
   })
 }
 
-function getUserMoviesSearch (userSearch) {
-  return new Promise (function (resolve, reject) {
-  console.log("inside getUserMoviesSearch")
-  fb.getMovies(userID)
-  .then(function (movieData) {
-    let selectedUserMovies = []
-    for (var movie in movieData) {
-      if (movieData[movie].title == userSearch) {
-        movieData[movie].id = movie
-        console.log("movieData[movie].id", movieData[movie].id)
-        selectedUserMovies.push(movieData[movie])
-        console.log("selectedUserMovies", selectedUserMovies)
-      }
-    }
-    domBuilder.loadMoviesUser(selectedUserMovies)
-    .then(function(userMovies){
-      setRating($('.rating'), userMovies)
-      $('.deleteButton').click(domBuilder.deleteButton)
-      $('.watched').click(domBuilder.toggleWatched)
+let userSavedMovies = {}
+let searchResultMovies = {}
+
+function getUserMoviesSearch(userSearch){
+  return new Promise(function(resolve, reject){
+    fb.getMovies(userID)
+    .then(function(movieData){
+      userSavedMovies = movieData
+      searchResultMovies = omdb.searchMovies(userSearch)
+    }).then(function(){
+      //check and build object of movies
+      domBuilder.loadMoviesUser(userSavedMovies)
+      .then(function(userMovies){
+        setRating($('.rating'), userMovies)
+         $('.deleteButton').click(domBuilder.deleteButton)
+         $('.watched').click(domBuilder.toggleWatched)
+      })
     })
-    })
-  resolve()
+    resolve()
   })
 }
+
+
+//
+// function getUserMoviesSearch (userSearch) {
+//   return new Promise (function (resolve, reject) {
+//   console.log("inside getUserMoviesSearch")
+//   fb.getMovies(userID)
+//   .then(function (movieData) {
+//     let selectedUserMovies = []
+//     for (var movie in movieData) {
+//       if (movieData[movie].title == userSearch) {
+//         movieData[movie].id = movie
+//         console.log("movieData[movie].id", movieData[movie].id)
+//         selectedUserMovies.push(movieData[movie])
+//         console.log("selectedUserMovies", selectedUserMovies)
+//       }
+//     }
+//     domBuilder.loadMoviesUser(selectedUserMovies)
+//     .then(function(userMovies){
+//       setRating($('.rating'), userMovies)
+//       $('.deleteButton').click(domBuilder.deleteButton)
+//       $('.watched').click(domBuilder.toggleWatched)
+//     })
+//     })
+//   resolve()
+//   })
+// }
 
 function loginEvents (result) {
   //set user and ID on global

@@ -15,9 +15,12 @@ function setRating(el, moviesObj){
   }
 
   Array.from(el).forEach((e, i) => {
-    let currentRating = moviesObj[`movie${i}`].rating
-    //sets up rating for each movie saved
-    rating(e, currentRating, maxRating, saveRatingFB)
+    if(moviesObj[`movie${i}`]){
+      let currentRating = moviesObj[`movie${i}`].rating
+      //sets up rating for each movie saved
+      rating(e, currentRating, maxRating, saveRatingFB)
+    }
+    return;
   })
   // let myRating = rating(el, currentRating, maxRating, saveRatingFB)
 }
