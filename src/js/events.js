@@ -53,15 +53,42 @@ function setEvents () {
       $(".bread-target").html("Show Watched")
       fb.getMovies(userID)
       .then(function (movieData) {
-        console.log("inside the THEN function")
-        domBuilder.loadMoviesUser(movieData)
-        console.log("after loadMoviesUser")
+        let selectedUserMovies = []
+        for (var movie in movieData) {
+        if (movieData[movie].watched) {
+        // movieData[movie].id = movie
+        // console.log("movieData[movie].id", movieData[movie].id)
+        selectedUserMovies.push(movieData[movie])
+        // console.log("selectedUserMovies", selectedUserMovies)
+      }
+    }
+      $("#initialSearchOutput").html("")
+      domBuilder.loadMoviesUser(selectedUserMovies)
+      setRating($('.rating'), movieData)
+      $('.deleteButton').click(domBuilder.deleteButton)
+      $('.watched').click(domBuilder.toggleWatched)
       })
-
     })
 
     $("#favorites-button").click(function () {
       $(".bread-target").html("Show Favorites")
+      fb.getMovies(userID)
+      .then(function (movieData) {
+        let selectedUserMovies = []
+        for (var movie in movieData) {
+        if (movieData[movie].rating === 10) {
+        // movieData[movie].id = movie
+        // console.log("movieData[movie].id", movieData[movie].id)
+        selectedUserMovies.push(movieData[movie])
+        // console.log("selectedUserMovies", selectedUserMovies)
+      }
+    }
+      $("#initialSearchOutput").html("")
+      domBuilder.loadMoviesUser(selectedUserMovies)
+      setRating($('.rating'), movieData)
+      $('.deleteButton').click(domBuilder.deleteButton)
+      $('.watched').click(domBuilder.toggleWatched)
+      })
     })
 }
 
@@ -100,9 +127,9 @@ function getUserMoviesSearch (userSearch) {
     for (var movie in movieData) {
       if (movieData[movie].title == userSearch) {
         movieData[movie].id = movie
-        console.log("movieData[movie].id", movieData[movie].id)
+        // console.log("movieData[movie].id", movieData[movie].id)
         selectedUserMovies.push(movieData[movie])
-        console.log("selectedUserMovies", selectedUserMovies)
+        // console.log("selectedUserMovies", selectedUserMovies)
       }
     }
     domBuilder.loadMoviesUser(selectedUserMovies)
