@@ -39,11 +39,13 @@ function setEvents () {
     })
 
     $('#searchMovie').click(function(){
+        if (userID !== null) {
            fb.getMovies()
            .then(function(movies){
             complexDomBuilder(movies)
            });
-        })
+       }
+    })
 }
 
 function getUserID () {

@@ -11,6 +11,7 @@ function outputToDomComplex(savedMovies) {
 
       savedMoviesarr.push(savedMovies[i])
     }
+
     savedMoviesarr.forEach(function(savedMovie, i) {
         if (savedMovie.watched === false) {
 
@@ -23,21 +24,20 @@ function outputToDomComplex(savedMovies) {
 
         let savedMovieOutput = complexMovieTemplate(savedMovie);
         $('#savedMovieOutput').append(savedMovieOutput);
-
-
-
-
    })
-     // $('.deleteButton').click(function(){
+
 
       let savedMoviesIDs = (Object.keys(savedMovies)) //need to target the specific key here and pass it into fb.deleteMovie function
       // console.log(savedMoviesIDs)
 
       savedMoviesIDs.forEach(function(savedMovieID){
         $('.deleteButton').click(function(){
+          fb.getMovies() //probably not a necessary call, but worth a shot
+          .then(function (movieData){
+        fb.deleteMovie(savedMovieID)
+          })
         fb.deleteMovie(savedMovieID)
         console.log(savedMoviesIDs) //sort of working: deleting every movie from database instead of one
-
       })
    })
 
