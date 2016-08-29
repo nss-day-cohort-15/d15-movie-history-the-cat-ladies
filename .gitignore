@@ -1,5 +1,6 @@
 node_modules
 bower_components
 .sass-cache
+/src/css
 /src/js/fb-getter.js
 dist

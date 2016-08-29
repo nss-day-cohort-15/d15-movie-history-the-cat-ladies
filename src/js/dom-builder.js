@@ -1,10 +1,15 @@
 "use strict";
 
-let simpleMovieTemplate = require('../../templates/article/simpleMovieTemplate.hbs');
-let complexMovieTemplate = require('../../templates/article/complexMovieTemplate.hbs');
-let objectBuilders = require('../../templates/article/build-movie-object.js');
-let fb = require('./fb-database');
-let omdb = require('./omdb-api');
+let simpleMovieTemplate = require('../../templates/article/simpleMovieTemplate.hbs')
+let complexMovieTemplate = require('../../templates/article/complexMovieTemplate.hbs')
+let objectBuilders = require('../../templates/article/build-movie-object.js')
+let fb = require('./fb-database')
+let omdb = require('./omdb-api')
+let setRating = require('./rating')
+let watched = require('./watched')
+let moviesObj = {}
+let userMovies = {}
+
 
 function outputToDomSimple(movieData) {
     $('#initialSearchOutput').html("");
@@ -18,7 +23,7 @@ function outputToDomSimple(movieData) {
     })
 
     $('.saveButton').click(function(){
-      let clicked = this;
+      let clicked = this
       let movieObj = {
         title: $(clicked).parent().parent().find('h3').html(),
         year: $(clicked).parent().parent().find('h4').html()
@@ -28,27 +33,73 @@ function outputToDomSimple(movieData) {
         .then(function(movie){
           fb.addMovie(objectBuilders.buildComplexMovieObj(movie))
             .then(function(movie){
-              console.log('movie saved: ' , movie);
-              $(clicked).html('SAVED').removeClass('btn-primary').addClass('btn-success').attr('disabled', 'disabled');
-            });
-        });
-    });
+              $(clicked).html('SAVED').removeClass('btn-primary').addClass('btn-success').attr('disabled', 'disabled')
+              Materialize.toast(`<h6>Movie was saved!</h6>`, 2000)
+            })
+        })
+    })
 
 }
 
-// function outputToDomComplex(movie) {
+//get movies that match the user and push to DOM
+function outputToDomComplex(){
+  return new Promise(function(resolve, reject){
+    fb.getMovies()
+    .then(function(movies){
+      loadMoviesUser(movies)
+      .then(function(userMovies){
+        setRating($('.rating'), userMovies)
+        $('.deleteButton').click(deleteButton)
+        $('.watched').click(toggleWatched)
+      })
+    })
+    resolve()
+  })
+}
 
-//     let complexMovieObject = buildComplexMovieObj(movie);
-//     let output = complexMovieTemplate(complexMovieObject);
-//     $('#initialSearchOutput').append(output)
-// }
-// }
+//delete move from firebase and remove from DOM
+function deleteButton(evt){
+  let movieID = $(evt.target).parent().attr('id')
 
-// function (movieObj) {
-//   $('#initialSearchOutput').append()
-// }
+  fb.deleteMovie(movieID)
+  .then(function(){
+    Materialize.toast(`<h6>Movie was deleted!</h6>`, 2000)
+    $(`#${movieID}`).parent().remove()
+  })
+}
 
+function toggleWatched(evt){
+  let watchedVal = $(evt.target).html()
+  let movieID = $(evt.target).parent().attr('id')
+  watched(watchedVal, movieID)
 
+  $(evt.target).text(function(i, text){
+    return text === "UnWatched" ? "Watched" : "UnWatched"
+  }).toggleClass('btn-success').toggleClass('btn-default')
+}
 
+function loadMoviesUser(movies){
+  //reset userMovies to empy obj each time called
+  userMovies = {}
 
-module.exports = outputToDomSimple;
+  return new Promise(function(resolve, reject){
+    let userID = require('./events').getUserID()
+    let output
+    let i = 0
+
+    //build movies object for specific user
+    for(var movie in movies){
+      if(movies[movie].uid === userID){
+        movies[movie].id = movie
+        userMovies[`movie${i}`] = movies[movie]
+        i++
+      }
+    }
+    output = complexMovieTemplate(userMovies)
+    $('#initialSearchOutput').html(output)
+
+    resolve(userMovies)
+  })
+}
+
+module.exports = {outputToDomSimple, outputToDomComplex}

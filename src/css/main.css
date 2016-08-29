@@ -1,7 +1,16 @@
 h1 {
   color: red; }
 
+#userInput {
+  font-size: 20px; }
+
 .movie-card-image {
   width: 80%; }
+
+.login-img {
+  width: 25%;
+  margin: 0 auto;
+  display: block;
+  border-radius: 50px; }
 
 /*# sourceMappingURL=main.css.map */
