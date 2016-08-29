@@ -5,6 +5,7 @@ let login = require('./user.js'),
     fb = require('./fb-database'),
     domBuilder = require('./dom-builder.js'),
     template = require('../../templates/article/moviedom.hbs'),
+    setRating = require('./rating'),
     userID = null,
     user = null
 
@@ -90,14 +91,18 @@ function getUserMoviesSearch (userSearch) {
   .then(function (movieData) {
     let selectedUserMovies = []
     for (var movie in movieData) {
-      console.log("user search in the FOR IN loop", userSearch)
-      console.log("movieData in the FOR IN loop", movieData[movie].title)
       if (movieData[movie].title == userSearch) {
+        movieData[movie].id = movie
         selectedUserMovies.push(movieData[movie])
         console.log("selectedUserMovies", selectedUserMovies)
       }
     }
     domBuilder.loadMoviesUser(selectedUserMovies)
+    .then(function(userMovies){
+      setRating($('.rating'), userMovies)
+      $('.deleteButton').click(domBuilder.deleteButton)
+      $('.watched').click(domBuilder.toggleWatched)
+    })
     })
   resolve()
   })
