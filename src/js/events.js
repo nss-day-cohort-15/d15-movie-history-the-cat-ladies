@@ -60,9 +60,11 @@ function setEvents () {
     }
       $("#initialSearchOutput").html("")
       domBuilder.loadMoviesUser(selectedUserMovies)
-      setRating($('.rating'), movieData)
-      $('.deleteButton').click(domBuilder.deleteButton)
-      $('.watched').click(domBuilder.toggleWatched)
+      .then(function(movieData){
+          setRating($('.rating'), movieData)
+          $('.deleteButton').click(domBuilder.deleteButton)
+          $('.watched').click(domBuilder.toggleWatched)
+        })
       })
     })
 
@@ -81,9 +83,11 @@ function setEvents () {
     }
       $("#initialSearchOutput").html("")
       domBuilder.loadMoviesUser(selectedUserMovies)
-      setRating($('.rating'), movieData)
-      $('.deleteButton').click(domBuilder.deleteButton)
-      $('.watched').click(domBuilder.toggleWatched)
+      .then(function(movieData){
+          setRating($('.rating'), movieData)
+          $('.deleteButton').click(domBuilder.deleteButton)
+          $('.watched').click(domBuilder.toggleWatched)
+        })
       })
     })
 
@@ -100,11 +104,13 @@ function setEvents () {
         // console.log("selectedUserMovies", selectedUserMovies)
       }
     }
-      $("#initialSearchOutput").html("")
-      domBuilder.loadMoviesUser(selectedUserMovies)
-      setRating($('.rating'), movieData)
-      $('.deleteButton').click(domBuilder.deleteButton)
-      $('.watched').click(domBuilder.toggleWatched)
+        $("#initialSearchOutput").html("")
+        domBuilder.loadMoviesUser(selectedUserMovies)
+        .then(function(movieData){
+          setRating($('.rating'), movieData)
+          $('.deleteButton').click(domBuilder.deleteButton)
+          $('.watched').click(domBuilder.toggleWatched)
+        })
       })
     })
 }
