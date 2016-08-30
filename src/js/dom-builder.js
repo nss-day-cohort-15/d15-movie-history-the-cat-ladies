@@ -25,7 +25,7 @@ function outputToDomSimple(movieData) {
     $('.saveButton').click(function(){
       let clicked = this
       let movieObj = {
-        title: $(clicked).parent().parent().find('h3').html(),
+        title: $(clicked).parent().parent().parent().find('h3').html(),
         year: $(clicked).parent().parent().find('h4').html()
       }
       //get movie from API
@@ -38,18 +38,20 @@ function outputToDomSimple(movieData) {
             })
         })
     })
+}
+
+function addToDom(data){
 
 }
 
-//get movies that match the user and push to DOM
-// function outputToDomComplex(){
+// get movies that match the user and push to DOM
+// function outputToDomComplex(movies){
 //   let uid = require('./events').getUserID()
-
 //   return new Promise(function(resolve, reject){
 //     fb.getMovies(uid)
 //     .then(function(movies){
 //       loadMoviesUser(movies)
-//       .then(function(userMovies){
+//       .then(function(movies){
 //         setRating($('.rating'), userMovies)
 //         $('.deleteButton').click(deleteButton)
 //         $('.watched').click(toggleWatched)

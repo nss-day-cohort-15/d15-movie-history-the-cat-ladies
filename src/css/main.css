@@ -18,4 +18,15 @@ h1 {
   display: block;
   border-radius: 50px; }
 
+span.thumb.active {
+  display: none; }
+
+.r_value {
+  background-color: #2bbbad;
+  font-size: 1.3em;
+  border-radius: 120px;
+  color: white;
+  padding: .8%;
+  margin-left: 5%; }
+
 /*# sourceMappingURL=main.css.map */

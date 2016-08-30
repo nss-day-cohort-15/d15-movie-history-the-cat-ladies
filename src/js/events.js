@@ -4,8 +4,10 @@ let login = require('./user.js'),
     omdb = require('./omdb-api'),
     fb = require('./fb-database'),
     domBuilder = require('./dom-builder.js'),
+    simpleMovieTemplate = require('../../templates/article/simpleMovieTemplate.hbs'),
     template = require('../../templates/article/moviedom.hbs'),
     setRating = require('./rating'),
+    object = require('../../templates/article/build-movie-object.js'),
     userID = null,
     user = null
 
@@ -113,6 +115,23 @@ function setEvents () {
         })
       })
     })
+
+    $('#val').on('input', function(){
+      $('#r_value').html($('#val').val())
+      fb.getMovies(userID)
+        .then(function(data){
+          $('#initialSearchOutput').html(" ")
+          var val = $('#val').val()
+          for(var key in data){
+            if(data[key].rating == val || data[key].rating > val){
+              let simpleMovieObject = data[key];
+              let output = simpleMovieTemplate(simpleMovieObject);
+              $('#initialSearchOutput').append(output);
+            }
+          }
+        })
+    })
+
 }
 
 function getUserID () {
