@@ -25,7 +25,7 @@ function outputToDomSimple(movieData) {
     $('.saveButton').click(function(){
       let clicked = this
       let movieObj = {
-        title: $(clicked).parent().parent().find('h3').html(),
+        title: $(clicked).parent().parent().parent().find('h3').html(),
         year: $(clicked).parent().parent().find('h4').html()
       }
       //get movie from API
