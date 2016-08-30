@@ -8,8 +8,13 @@ h1 {
   font-size: 20px;
 }
 
+.movie-card {
+    max-height: 600px;
+    min-height: 600px;
+}
 .movie-card-image {
     width: 80%;
+    max-height: 300px;
 }
 
 .login-img {
