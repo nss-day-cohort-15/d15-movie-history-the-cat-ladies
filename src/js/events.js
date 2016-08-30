@@ -1,6 +1,7 @@
 "use strict";
 
 let login = require('./user.js'),
+    logOutGoogle = require('./logout.js'),
     omdb = require('./omdb-api'),
     fb = require('./fb-database'),
     domBuilder = require('./dom-builder.js'),
@@ -197,6 +198,17 @@ function loginEvents (result) {
   addSearchEvent()
   $('#auth-button').unbind().attr('id','logout').html('LogOut')
   setEvents()
+  $('#logout').click(function(){
+    console.log('click');
+    let logoutToast = `<span><img class="login-img" src="${user.photoURL}"><h6>${user.displayName} successfully logged out!</h6></span>`
+    Materialize.toast(logoutToast, 2000)
+    logOutGoogle()
+    setTimeout(function(){
+      window.location.reload()
+    }, 2000);
+  })
   console.log("user ID", user)
 }
+
+
 module.exports = {setEvents, getUserID}
