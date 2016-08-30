@@ -1,7 +1,7 @@
 'use strict';
 
 let firebase = require("./firebaseConfig"),
-    url = 'https://cat-ladies-movie-history.firebaseio.com';
+    url = 'https://popcorn-classics.firebaseio.com/';
 
 function getMovies(uid) {
   return new Promise(function(resolve, reject){

@@ -1,6 +1,7 @@
 "use strict";
 
 function buildSimpleMovieObj(movie) {
+    console.log(movie)
     let events = require('../../src/js/events.js');
     let userID = events.getUserID();
     let simpleMovie = {
