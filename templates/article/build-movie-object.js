@@ -10,7 +10,7 @@ function buildSimpleMovieObj(movie) {
         uid: userID,
         imdbID: movie.imdbID
     }
-    // console.log("constructed simple movie", simpleMovie)
+    console.log("constructed simple movie", simpleMovie)
     return simpleMovie
 }
 
